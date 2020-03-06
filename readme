@@ -1,0 +1,70 @@
+Using future in flutter
+
+try
+{
+    int value=foo();
+    return bar(value);
+}
+catch(e)
+{
+    return 599;
+}
+
+
+The same can be implementd using future by 
+
+
+Future<int> future=new Future(foo);
+// here the future is an object in which the result of foo is stored as in the try catch example
+
+future.then(int value)=>bar(value))
+    .catchError((e)=> 599)
+
+A Future represents a computation that doesn’t complete immediately. Where a normal function returns the result, an asynchronous function returns a Future, which will eventually contain the result. The future will tell you when the result is ready.
+
+A stream is a sequence of asynchronous events. It is like an asynchronous Iterable—where, instead of getting the next event when you ask for it, the stream tells you that there is an event when it is ready.
+
+Future<int> sumStream(Stream<int> stream) async {
+  var sum = 0;
+  await for (var value in stream) {
+    sum += value;
+  }
+  return sum;
+}
+
+This code simply receives each event of a stream of integer events, adds them up, and returns (a future of) the sum. When the loop body ends, the function is paused until the next event arrives or the stream is done.
+
+The function is marked with the async keyword, which is required when using the await for loop.
+
+
+How  use stram builder 
+
+StreamBuilder
+(
+    stream:_myStream,//Using strean builder as a Stream
+    // Use a builder
+          initialData: 42,
+          builder:(context , snapshot)
+          {
+              return MyWidget(snapshot.data);
+          }
+          //if snapshot does not have any data use a loading indicator
+            if(!snapshot.hasData)
+            {
+                return CircularProgressIndicator();
+
+            }
+            return MyWidget(snapshot.data);
+
+)
+
+1) a single class for all types of sign in ->services
+
+cloud firestore was within dev dependencies which is now shifted under dependencies
+
+cloud firestore version : 0.12.9+4
+
+class path google services  : 4.0.1
+firebase auth : 0.14.0+5
+
+
